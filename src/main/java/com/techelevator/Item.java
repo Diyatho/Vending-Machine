@@ -13,7 +13,7 @@ public class Item {
 		return slotId;
 	}
 	
-	public String getItemname() {
+	public String getItemName() {
 		return itemName;
 	}
 	public double getPrice() {
@@ -32,6 +32,20 @@ public class Item {
 		this.slotId = slotId;
 	}
 	
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+	
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
+	public void setCategory (String category) {
+		this.category = category;
+	}
+	public void setQuantityRemaining (int quantityRemaining) {
+		this.quantityRemaining = quantityRemaining;
+	}
 	
 
 }
