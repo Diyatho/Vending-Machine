@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 public class Balance {
 	
+	private BigDecimal balance;
 	private int giveChange;
 	private int feedMoney;
 	private double dollars;
@@ -12,36 +13,38 @@ public class Balance {
 	private int nickels = 0;
 	private int dimes = 0;
 	private int quaters = 0;
-	private BigDecimal balance;
 	
+	public BigDecimal getBalance() {
+		return balance;
+	}
 	
 	
 	public double getDollars() {
 		return dollars;
 	}
-	
+
 	public double getCents() {
 		return cents;
 	}
-	
-	public void feedMoney (){
 
-System.out.println("Please Feed The Money $1, $2, $5, $10, or $20");
+	public void feedMoney() {
 
+		System.out.println("Please Feed The Money $1, $2, $5, $10, or $20");
 
 	}
-	
+
 	public boolean isValidAmount(String amountCheck) {
 		return amountCheck.equals("1") || amountCheck.equals("2") ||
 				amountCheck.equals("5") || amountCheck.equals("10") ||
 				amountCheck.equals("20");
+	}
 	
 		
 public BigDecimal updateBalance(BigDecimal inputMoney) {
-	balance.add(inputMoney);
+	balance =  balance.add(inputMoney);
+	return balance;
 }
 				
-	}
 	
 
 public void giveChange (){
