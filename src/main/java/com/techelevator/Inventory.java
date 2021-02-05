@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Inventory extends Balance{
+public class Inventory{
 	
 	List<Item> inventory = new ArrayList<Item>();
 	public List<Item> stockInventory() throws FileNotFoundException {
@@ -54,7 +54,7 @@ public class Inventory extends Balance{
 		}
 	}
 	
-	public boolean checkItem(String userCode) {
+	public boolean checkItem(String userCode, BigDecimal balance) throws ChoiceFailException {
 		boolean found = false;
 		boolean isValid = true;
 		for(Item item : inventory) {
@@ -63,20 +63,20 @@ public class Inventory extends Balance{
 				
 				if(item.getQuantityRemaining() == 0 ) {
 					isValid = false;
-					break;
-					//throw new ChoiceFailException("The item is SOLD OUT. Please select another item");
+					//break;
+					throw new ChoiceFailException("The item is SOLD OUT. Please select another item");
 				}
-				if(item.getPrice().compareTo(getBalance()) > 0) {
+				if(item.getPrice().compareTo(balance) > 0) {
 					isValid = false;
-					break;
-					//throw new ChoiceFailException("The balance is not enough to buy this item. Please update your balance");
+					//break;
+					throw new ChoiceFailException("The balance is not enough to buy this item. Please update your balance");
 				}
 				
 			}
 		}
 		if(found == false) {
 			isValid = false;
-			//throw new ChoiceFailException("This is not a valid code. Please try again");
+			throw new ChoiceFailException("This is not a valid code. Please try again");
 		}
 		return isValid;
 	}

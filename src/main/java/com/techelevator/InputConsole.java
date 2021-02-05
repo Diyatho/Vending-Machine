@@ -3,7 +3,13 @@ package com.techelevator;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
-public class InputConsole extends VendingMachine{
+public class InputConsole {
+	Balance balance = new Balance();
+	private Inventory inventory;
+	public InputConsole(Inventory inventory) {
+		this.inventory = inventory;
+	}
+	
 	
 	
 	
@@ -12,6 +18,7 @@ public class InputConsole extends VendingMachine{
 	public  void getUserInput() {
 		Menu menu = new Menu();
 		String purchaseMenuOption;
+		
 		Scanner scanner = new Scanner(System.in);
 		String userInput;
 		do {
@@ -22,7 +29,7 @@ public class InputConsole extends VendingMachine{
 			}
 			else if(userInput.equals("2")){
 				do {
-					menu.printPurchaseMenu();
+					menu.printPurchaseMenu(balance.getBalance());
 					purchaseMenuOption = scanner.nextLine();
 					if(purchaseMenuOption.equals("1")) {
 						balance.feedMoney();
@@ -38,7 +45,13 @@ public class InputConsole extends VendingMachine{
 						inventory.displayVendingMenu();
 						System.out.println("Enter Code: ");
 						String userCode = scanner.nextLine();
-						boolean codeIsValid = inventory.checkItem(userCode);
+						boolean codeIsValid = false;
+						try {
+							codeIsValid = inventory.checkItem(userCode, balance.getBalance());
+						}
+						catch(Exception e) {
+							System.out.println(e.getMessage());
+						}
 						if(codeIsValid) {
 							inventory.dispenseItem(userCode);
 							//update balance
