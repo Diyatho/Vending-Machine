@@ -10,10 +10,6 @@ public class InputConsole {
 		this.inventory = inventory;
 	}
 	
-	
-	
-	
-	private Balance balance;
 
 	public  void getUserInput() {
 		Menu menu = new Menu();
@@ -53,8 +49,9 @@ public class InputConsole {
 							System.out.println(e.getMessage());
 						}
 						if(codeIsValid) {
-							inventory.dispenseItem(userCode);
-							//update balance
+							BigDecimal balanceNow = inventory.dispenseItem(userCode, balance.getBalance());
+							//update balance with the current balance : balanceNow
+							balance.setBalance(balanceNow);
 							//update log
 							
 						}
@@ -71,7 +68,6 @@ public class InputConsole {
 					System.exit(1);
 				}			
 		}while(!userInput.equals("3"));
-		
 		
 	}
 

@@ -83,11 +83,13 @@ public class Inventory{
 	
 	
 	//dispenseItem
-	public boolean dispenseItem(String userCode) {
+	public BigDecimal dispenseItem(String userCode, BigDecimal currentBalance) {
+		BigDecimal balance = currentBalance;
 		for(Item item : inventory) {
 			if(item.getSlotId().equals(userCode)) {
 				//prints line with item, price and available balance
-				System.out.println(item.getItemName()+ " " + item.getPrice());
+				balance = balance.subtract(item.getPrice());
+				System.out.println(item.getItemName()+ " " + item.getPrice() + "   " + balance);
 				//decreases quantity by 1
 				 item.setQuantityRemaining(item.getQuantityRemaining() - 1);
 				 
@@ -105,12 +107,7 @@ public class Inventory{
 				}
 			}
 		}
-		
-		
-		 
-		
-		//prints line for Chips | Gum |Drink
-		return true;
+		return balance;
 	}
 
 }

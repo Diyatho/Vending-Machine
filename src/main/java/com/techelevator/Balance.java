@@ -21,6 +21,10 @@ public class Balance {
 	public Balance() {
 		balance = BigDecimal.ZERO;
 	}
+	public void setBalance(BigDecimal currentBalance) {
+		this.balance = currentBalance;
+	}
+	
 	
 	
 	public double getDollars() {
@@ -48,6 +52,8 @@ public BigDecimal updateBalance(BigDecimal inputMoney) {
 	balance =  balance.add(inputMoney);
 	return balance;
 }
+
+
 				
 	
 

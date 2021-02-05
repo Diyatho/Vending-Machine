@@ -14,7 +14,8 @@ public class VendingMachine {
 		}catch(Exception e) {
 			
 		}
-		
+		System.out.println("Exiting Application..");
+		System.exit(1);
 	}	
 	
 }
