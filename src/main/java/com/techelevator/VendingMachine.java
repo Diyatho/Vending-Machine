@@ -9,18 +9,12 @@ public class VendingMachine {
 	public static void main(String args[]) {
 		try {
 			inventory.stockInventory();
-			InputConsole inputConsole = new InputConsole();
+			InputConsole inputConsole = new InputConsole(inventory);
 			inputConsole.getUserInput();
 		}catch(Exception e) {
 			
 		}
 		
-	}
-	
-
-
-	
-	
-	
+	}	
 	
 }
