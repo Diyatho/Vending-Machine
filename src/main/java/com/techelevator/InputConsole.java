@@ -4,8 +4,11 @@ import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class InputConsole extends VendingMachine{
-	Balance balance = new Balance();
 	
+	
+	
+	private Balance balance;
+
 	public  void getUserInput() {
 		Menu menu = new Menu();
 		String purchaseMenuOption;

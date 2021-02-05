@@ -84,9 +84,31 @@ public class Inventory extends Balance{
 	
 	//dispenseItem
 	public boolean dispenseItem(String userCode) {
+		for(Item item : inventory) {
+			if(item.getSlotId().equals(userCode)) {
+				//prints line with item, price and available balance
+				System.out.println(item.getItemName()+ " " + item.getPrice());
+				//decreases quantity by 1
+				 item.setQuantityRemaining(item.getQuantityRemaining() - 1);
+				 
+				if (item.getCategory().equals("Chip")) {
+					System.out.println("Crunch Crunch, Yum!");
+				}
+				else if (item.getCategory().equals("Candy")) {
+					System.out.println("Munch Munch, Yum!");
+				}
+				else if (item.getCategory().equals("Drinks")) {
+					System.out.println("Glug Glug, Yum!");
+				}
+				else if (item.getCategory().equals("Gum")) {
+					System.out.println("Chew Chew, Yum!");
+				}
+			}
+		}
 		
-		//prints line with item, price and available balance
-		//decreases quantity by 1
+		
+		 
+		
 		//prints line for Chips | Gum |Drink
 		return true;
 	}
