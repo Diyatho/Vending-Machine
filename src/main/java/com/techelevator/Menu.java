@@ -13,5 +13,7 @@ public class Menu {
 	public void printPurchaseMenu () {
 		System.out.println(">>(1) Feed Money >(2) Select Product >(3) Finish Transaction > ");
 		
+		
 	}
+	
 }
