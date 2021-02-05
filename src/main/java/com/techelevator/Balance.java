@@ -18,6 +18,10 @@ public class Balance {
 		return balance;
 	}
 	
+	public Balance() {
+		balance = BigDecimal.ZERO;
+	}
+	
 	
 	public double getDollars() {
 		return dollars;

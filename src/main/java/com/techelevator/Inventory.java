@@ -50,7 +50,7 @@ public class Inventory extends Balance{
 	
 	public void displayVendingMenu() {
 		for(Item item : inventory) {
-			System.out.println(item.getSlotId() + "  " + item.getItemName() + "   " + item.getPrice());
+			System.out.println(item.getSlotId() + "      " + item.getItemName() + addSpace(item.getItemName().length()) + item.getPrice());
 		}
 	}
 	

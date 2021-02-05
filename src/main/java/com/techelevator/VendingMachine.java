@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class VendingMachine {
 	static Inventory inventory = new Inventory();
-	static Balance balance = new Balance();
+	//static Balance balance = new Balance();
 	
 	public static void main(String args[]) {
 		try {
