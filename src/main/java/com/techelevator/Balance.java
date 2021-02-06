@@ -1,6 +1,7 @@
 package com.techelevator;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 public class Balance {
 
@@ -54,8 +55,8 @@ public class Balance {
 
 	public void giveChange() {
 
-		int totalCoins = balance.intValue() * 100;
-
+		int totalCoins = balance.multiply(BigDecimal.valueOf(100)); 
+				
 		while (totalCoins > 0) {
 
 			if (totalCoins >= 25) {
@@ -73,7 +74,7 @@ public class Balance {
 		}
 		System.out.println("Total Change: " + quarters + "Quarters, " + dimes + "Dimes, " + nickels + "Nickels,");
 		log.createLogEntry("GIVE CHANGE:", balance, BigDecimal.ZERO);
-
+		
 		balance = BigDecimal.ZERO;
 	}
 }

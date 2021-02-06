@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class VendingMachine {
 	List<Item> inventory = new ArrayList<Item>();
+	Log log = new Log();
 	
 	public void stockInventory() {
 		
@@ -96,15 +97,27 @@ public class VendingMachine {
 				 
 				if (item.getCategory().equals("Chip")) {
 					System.out.println("Crunch Crunch, Yum!");
+					String arg1 =item.getItemName() + " " + item.getSlotId();
+					log.createLogEntry(arg1, currentBalance, balance);
+					break;
 				}
 				else if (item.getCategory().equals("Candy")) {
 					System.out.println("Munch Munch, Yum!");
+					String arg1 =item.getItemName() + " " + item.getSlotId();
+					log.createLogEntry(arg1, currentBalance, balance);
+					break;
 				}
 				else if (item.getCategory().equals("Drinks")) {
 					System.out.println("Glug Glug, Yum!");
+					String arg1 =item.getItemName() + " " + item.getSlotId();
+					log.createLogEntry(arg1, currentBalance, balance);
+					break;
 				}
 				else if (item.getCategory().equals("Gum")) {
 					System.out.println("Chew Chew, Yum!");
+					String arg1 =item.getItemName() + " " + item.getSlotId();
+					log.createLogEntry(arg1, currentBalance, balance);
+					break;
 				}
 			}
 		}

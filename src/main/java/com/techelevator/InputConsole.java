@@ -53,6 +53,7 @@ public class InputConsole{
 							System.out.println(e.getMessage());
 						}
 						if(codeIsValid) {
+							
 							BigDecimal balanceNow = VM.dispenseItem(userCode, balance.getBalance());
 							//update balance with the current balance : balanceNow
 							balance.setBalance(balanceNow);
@@ -62,15 +63,16 @@ public class InputConsole{
 					}
 					else if(purchaseMenuOption.equals("3")) {
 						balance.giveChange();
+						
 						//update balance
 						//update log
 					}
 				} while(!purchaseMenuOption.equals("3"));
 			}			
-			else if(userInput.equals("3")) {
+			/*else if(userInput.equals("3")) {
 				
 					System.exit(1);
-				}			
+				}	*/		
 		}while(!userInput.equals("3"));
 		
 	}
