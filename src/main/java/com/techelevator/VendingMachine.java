@@ -17,7 +17,7 @@ public class VendingMachine {
 		try(Scanner fileScanner = new Scanner(stockFile)){
 			while(fileScanner.hasNextLine()) {
 				String inventoryLine = fileScanner.nextLine();
-				System.out.println("inventory line " + inventoryLine);
+				//System.out.println("inventory line " + inventoryLine);
 				inventoryData = inventoryLine.split("[|]");
 				Item item = new Item();
 				item.setSlotId(inventoryData[0]);
@@ -29,9 +29,6 @@ public class VendingMachine {
 			}
 		}catch (Exception e) {
 			System.out.println("Error while stocking inventory");
-		}
-		for(Item item: inventory) {
-			System.out.println(item.getItemName());
 		}
 	}
 	
@@ -111,12 +108,9 @@ public class VendingMachine {
 				}
 			}
 		}
+		
 		return balance;
 	}
 
-	
-	public void start() {
-		
-	}
 	
 }

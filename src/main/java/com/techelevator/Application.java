@@ -9,7 +9,6 @@ public class Application {
 		vendingMachine.stockInventory();
 		InputConsole inputConsole = new InputConsole(vendingMachine);
 		inputConsole.getUserInput();
-		vendingMachine.start();
 
 		
 	}

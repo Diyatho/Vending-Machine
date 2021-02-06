@@ -13,6 +13,7 @@ public class Balance {
 	private int nickels = 0;
 	private int dimes = 0;
 	private int quarters = 0;
+	Log log = new Log();
 
 	public BigDecimal getBalance() {
 		return balance;
@@ -47,6 +48,7 @@ public class Balance {
 
 	public BigDecimal updateBalance(BigDecimal inputMoney) {
 		balance = balance.add(inputMoney);
+		log.createLogEntry("FEED MONEY:",inputMoney, balance);
 		return balance;
 	}
 
@@ -69,6 +71,7 @@ public class Balance {
 			}
 		}
 		System.out.println("Total Change: " + quarters + "Quarters, " + dimes + "Dimes, " + nickels + "Nickels,");
+		log.createLogEntry("GIVE CHANGE:", balance, BigDecimal.ZERO);
 
 		balance = BigDecimal.ZERO;
 	}
