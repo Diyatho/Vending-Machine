@@ -29,7 +29,7 @@ public class Log {
 	    String timeForLog = now.format(DateTimeFormatter.ofPattern(pattern));
 	    //to print 5 as 5.00
 	    logEntry = dateForLog + " " + timeForLog + " "+ action +  " $" + arg1.setScale(2, BigDecimal.ROUND_HALF_UP) + " $" + arg2.setScale(2, BigDecimal.ROUND_HALF_UP);
-	    System.out.println("Entering in log: " + logEntry);
+	    System.out.println("\nEntering in log: " + logEntry);
 	    logEntries.add(logEntry);
 	}
 

@@ -55,7 +55,7 @@ public class Balance {
 
 	public void giveChange() {
 
-		int totalCoins = balance.multiply(BigDecimal.valueOf(100)); 
+		int totalCoins = balance.multiply(BigDecimal.valueOf(100)).intValue(); 
 				
 		while (totalCoins > 0) {
 
@@ -71,7 +71,7 @@ public class Balance {
 
 			}
 		}
-		System.out.println("Total Change: " + quarters + "Quarters, " + dimes + "Dimes, " + nickels + "Nickels,");
+		System.out.println("Total Change: " + quarters + " Quarters, " + dimes + " Dimes, " + nickels + " Nickels");
 		log.createLogEntry("GIVE CHANGE:", balance, BigDecimal.ZERO);
 		
 		balance = BigDecimal.ZERO;
