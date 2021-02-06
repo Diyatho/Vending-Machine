@@ -12,7 +12,7 @@ public class Balance {
 	private int totalCoins;
 	private int nickels = 0;
 	private int dimes = 0;
-	private int quaters = 0;
+	private int quarters = 0;
 	
 	public BigDecimal getBalance() {
 		return balance;
@@ -59,25 +59,31 @@ public BigDecimal updateBalance(BigDecimal inputMoney) {
 
 public void giveChange (){
 
+	int totalCoins = balance.intValue() * 100;
+	//int quarters = balanceInCents / 25;
+	//balanceInCents -= quarters * 25;
 	
 	while (totalCoins > 0) {
 	
-	if (totalCoins >=25) {
-		quaters ++;
-		totalCoins -=25;
+	if (totalCoins >= 25) {
+		quarters ++;
+		totalCoins -= 25;
 	}
 	else if (totalCoins >= 10) {
 		dimes ++;
-		totalCoins -=10;
+		totalCoins -= 10;
 	}
 	else if(totalCoins >= 5) {
 		nickels ++;
-		totalCoins -=5;
+		totalCoins -= 5;
+		
 	}
 	}
-	System.out.println ("Total Change: " +quaters + "Quaters, " + dimes + "Dimes, " + nickels + "Nickles,");
-	}
-	}
+	System.out.println ("Total Change: " +quarters + "Quarters, " + dimes + "Dimes, " + nickels + "Nickles,");
+	
+	balance = BigDecimal.ZERO;
+}
+}
 	
 
 
