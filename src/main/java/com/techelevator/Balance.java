@@ -3,7 +3,7 @@ package com.techelevator;
 import java.math.BigDecimal;
 
 public class Balance {
-	
+
 	private BigDecimal balance;
 	private int giveChange;
 	private int feedMoney;
@@ -13,20 +13,19 @@ public class Balance {
 	private int nickels = 0;
 	private int dimes = 0;
 	private int quarters = 0;
-	
+
 	public BigDecimal getBalance() {
 		return balance;
 	}
-	
+
 	public Balance() {
 		balance = BigDecimal.ZERO;
 	}
+
 	public void setBalance(BigDecimal currentBalance) {
 		this.balance = currentBalance;
 	}
-	
-	
-	
+
 	public double getDollars() {
 		return dollars;
 	}
@@ -42,48 +41,35 @@ public class Balance {
 	}
 
 	public boolean isValidAmount(String amountCheck) {
-		return amountCheck.equals("1") || amountCheck.equals("2") ||
-				amountCheck.equals("5") || amountCheck.equals("10") ||
-				amountCheck.equals("20");
+		return amountCheck.equals("1") || amountCheck.equals("2") || amountCheck.equals("5") || amountCheck.equals("10")
+				|| amountCheck.equals("20");
 	}
-	
-		
-public BigDecimal updateBalance(BigDecimal inputMoney) {
-	balance =  balance.add(inputMoney);
-	return balance;
+
+	public BigDecimal updateBalance(BigDecimal inputMoney) {
+		balance = balance.add(inputMoney);
+		return balance;
+	}
+
+	public void giveChange() {
+
+		int totalCoins = balance.intValue() * 100;
+
+		while (totalCoins > 0) {
+
+			if (totalCoins >= 25) {
+				quarters++;
+				totalCoins -= 25;
+			} else if (totalCoins >= 10) {
+				dimes++;
+				totalCoins -= 10;
+			} else if (totalCoins >= 5) {
+				nickels++;
+				totalCoins -= 5;
+
+			}
+		}
+		System.out.println("Total Change: " + quarters + "Quarters, " + dimes + "Dimes, " + nickels + "Nickels,");
+
+		balance = BigDecimal.ZERO;
+	}
 }
-
-
-				
-	
-
-public void giveChange (){
-
-	int totalCoins = balance.intValue() * 100;
-	//int quarters = balanceInCents / 25;
-	//balanceInCents -= quarters * 25;
-	
-	while (totalCoins > 0) {
-	
-	if (totalCoins >= 25) {
-		quarters ++;
-		totalCoins -= 25;
-	}
-	else if (totalCoins >= 10) {
-		dimes ++;
-		totalCoins -= 10;
-	}
-	else if(totalCoins >= 5) {
-		nickels ++;
-		totalCoins -= 5;
-		
-	}
-	}
-	System.out.println ("Total Change: " +quarters + "Quarters, " + dimes + "Dimes, " + nickels + "Nickles,");
-	
-	balance = BigDecimal.ZERO;
-}
-}
-	
-
-

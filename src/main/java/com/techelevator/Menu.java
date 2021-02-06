@@ -3,7 +3,6 @@ package com.techelevator;
 import java.math.BigDecimal;
 
 import com.techelevator.Balance;
-import com.techelevator.Inventory;
 
 public class Menu {
 

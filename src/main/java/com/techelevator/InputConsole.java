@@ -1,13 +1,16 @@
 package com.techelevator;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Scanner;
 
-public class InputConsole {
+public class InputConsole{
 	Balance balance = new Balance();
-	private Inventory inventory;
-	public InputConsole(Inventory inventory) {
-		this.inventory = inventory;
+	private List<Item> inventory;
+	VendingMachine VM = new VendingMachine();
+	
+	public InputConsole(VendingMachine vendingMachine) {
+		this.VM = vendingMachine;
 	}
 	
 
@@ -21,7 +24,7 @@ public class InputConsole {
 			menu.printMainMenu();
 			userInput = scanner.nextLine();
 			if(userInput.equals("1")) {
-				inventory.displayMenu();
+				VM.displayMenu();
 			}
 			else if(userInput.equals("2")){
 				do {
@@ -38,18 +41,19 @@ public class InputConsole {
 						//update log
 					}
 					else if(purchaseMenuOption.equals("2")) {
-						inventory.displayVendingMenu();
+						//inventory.displayVendingMenu();
+						VM.displayVendingMenu();
 						System.out.println("Enter Code: ");
 						String userCode = scanner.nextLine();
 						boolean codeIsValid = false;
 						try {
-							codeIsValid = inventory.checkItem(userCode, balance.getBalance());
+							codeIsValid = VM.checkItem(userCode, balance.getBalance());
 						}
 						catch(Exception e) {
 							System.out.println(e.getMessage());
 						}
 						if(codeIsValid) {
-							BigDecimal balanceNow = inventory.dispenseItem(userCode, balance.getBalance());
+							BigDecimal balanceNow = VM.dispenseItem(userCode, balance.getBalance());
 							//update balance with the current balance : balanceNow
 							balance.setBalance(balanceNow);
 							//update log
