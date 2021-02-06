@@ -72,7 +72,7 @@ public class Balance {
 		}
 		System.out.println("Total Change: " + quarters + "Quarters, " + dimes + "Dimes, " + nickels + "Nickels,");
 		log.createLogEntry("GIVE CHANGE:", balance, BigDecimal.ZERO);
-
+		
 		balance = BigDecimal.ZERO;
 	}
 }
