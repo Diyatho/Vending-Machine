@@ -67,7 +67,8 @@ public class Balance {
 			} else if (totalCoins >= 5) {
 				nickels++;
 				totalCoins -= 5;
-
+				
+				
 			}
 		}
 		System.out.println("Total Change: " + quarters + "Quarters, " + dimes + "Dimes, " + nickels + "Nickels,");
