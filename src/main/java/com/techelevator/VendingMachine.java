@@ -9,7 +9,13 @@ import java.util.Scanner;
 
 public class VendingMachine {
 	List<Item> inventory = new ArrayList<Item>();
+	Balance balanceObject = new Balance();
 	Log log = new Log();
+	private BigDecimal balance;
+	
+	public VendingMachine() {
+		balance = BigDecimal.ZERO;
+	}
 	
 	public void stockInventory() {
 		
@@ -34,11 +40,12 @@ public class VendingMachine {
 	}
 	
 	public void displayMenu() {
-		System.out.println("Item                  Count left            Price");
+		System.out.println("\nItem                  Count left            Price");
 		System.out.println("_________________________________________________\n");
 		for(Item item : inventory) {
 			System.out.println(item.getItemName() + addSpace(item.getItemName().length()) + item.getQuantityRemaining() + addSpace(1) + item.getPrice());
 		}
+		System.out.println("\n\n");
 		
 	}
 	
@@ -56,7 +63,7 @@ public class VendingMachine {
 		}
 	}
 	
-	public boolean checkItem(String userCode, BigDecimal balance) throws ChoiceFailException {
+	public boolean checkItem(String userCode) throws ChoiceFailException {
 		boolean found = false;
 		boolean isValid = true;
 		for(Item item : inventory) {
@@ -85,11 +92,14 @@ public class VendingMachine {
 	
 	
 	//dispenseItem
-	public BigDecimal dispenseItem(String userCode, BigDecimal currentBalance) {
-		BigDecimal balance = currentBalance;
+	public void dispenseItem(String userCode) {
+		Item userChoice = new Item();
+		BigDecimal oldBalance = balance;
 		for(Item item : inventory) {
 			if(item.getSlotId().equals(userCode)) {
+				userChoice = item;
 				//prints line with item, price and available balance
+				
 				balance = balance.subtract(item.getPrice());
 				System.out.println(item.getItemName()+ " " + item.getPrice() + "   " + balance);
 				//decreases quantity by 1
@@ -97,33 +107,52 @@ public class VendingMachine {
 				 
 				if (item.getCategory().equals("Chip")) {
 					System.out.println("Crunch Crunch, Yum!");
-					String arg1 =item.getItemName() + " " + item.getSlotId();
-					log.createLogEntry(arg1, currentBalance, balance);
+					//String arg1 =item.getItemName() + " " + item.getSlotId();
+					//log.createLogEntry(arg1, oldBalance, balance);
 					break;
 				}
 				else if (item.getCategory().equals("Candy")) {
 					System.out.println("Munch Munch, Yum!");
-					String arg1 =item.getItemName() + " " + item.getSlotId();
-					log.createLogEntry(arg1, currentBalance, balance);
+					//String arg1 =item.getItemName() + " " + item.getSlotId();
+					//log.createLogEntry(arg1, oldBalance, balance);
 					break;
 				}
-				else if (item.getCategory().equals("Drinks")) {
+				else if (item.getCategory().equals("Drink")) {
 					System.out.println("Glug Glug, Yum!");
-					String arg1 =item.getItemName() + " " + item.getSlotId();
-					log.createLogEntry(arg1, currentBalance, balance);
+					//String arg1 =item.getItemName() + " " + item.getSlotId();
+					//log.createLogEntry(arg1, oldBalance, balance);
 					break;
 				}
 				else if (item.getCategory().equals("Gum")) {
 					System.out.println("Chew Chew, Yum!");
-					String arg1 =item.getItemName() + " " + item.getSlotId();
-					log.createLogEntry(arg1, currentBalance, balance);
+					//String arg1 =item.getItemName() + " " + item.getSlotId();
+					//log.createLogEntry(arg1, oldBalance, balance);
 					break;
 				}
 			}
 		}
-		
-		return balance;
+		String arg1 =userChoice.getItemName() + " " + userChoice.getSlotId();
+		log.createLogEntry(arg1, oldBalance, balance);
 	}
 
+	public BigDecimal getBalance() {
+		return balance;
+	}
 	
+	public void setBalance(BigDecimal currentBalance) {
+		this.balance = currentBalance;
+	}
+	
+	public BigDecimal updateBalance(BigDecimal inputMoney) {
+		balance = balance.add(inputMoney);
+		log.createLogEntry("FEED MONEY:",inputMoney, balance);
+		return balance;
+	}
+	
+	public void giveChange() {
+		balanceObject.makeChange(balance);
+		log.createLogEntry("GIVE CHANGE:", balance, BigDecimal.ZERO);
+		log.writeLog();
+		balance = BigDecimal.ZERO;
+	}
 }

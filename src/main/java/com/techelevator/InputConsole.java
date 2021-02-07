@@ -7,10 +7,10 @@ import java.util.Scanner;
 public class InputConsole{
 	Balance balance = new Balance();
 	private List<Item> inventory;
-	VendingMachine VM = new VendingMachine();
+	VendingMachine vendingMachine = new VendingMachine();
 	
 	public InputConsole(VendingMachine vendingMachine) {
-		this.VM = vendingMachine;
+		this.vendingMachine = vendingMachine;
 	}
 	
 
@@ -24,11 +24,11 @@ public class InputConsole{
 			menu.printMainMenu();
 			userInput = scanner.nextLine();
 			if(userInput.equals("1")) {
-				VM.displayMenu();
+				vendingMachine.displayMenu();
 			}
 			else if(userInput.equals("2")){
 				do {
-					menu.printPurchaseMenu(balance.getBalance());
+					menu.printPurchaseMenu(vendingMachine.getBalance());
 					purchaseMenuOption = scanner.nextLine();
 					if(purchaseMenuOption.equals("1")) {
 						balance.feedMoney();
@@ -36,43 +36,32 @@ public class InputConsole{
 						boolean isValidAmount = balance.isValidAmount(inputMoney);
 						if(isValidAmount) {
 							System.out.println("Money entered is valid");
-							System.out.println(" Current balance is: "+ balance.updateBalance(new BigDecimal(inputMoney)));
+							System.out.println("Current balance is: "+ vendingMachine.updateBalance(new BigDecimal(inputMoney)));
 						}
-						//update log
+						else{
+							System.out.println("Money entered is not valid. Please try again");
+						}
 					}
 					else if(purchaseMenuOption.equals("2")) {
-						//inventory.displayVendingMenu();
-						VM.displayVendingMenu();
-						System.out.println("Enter Code: ");
+						vendingMachine.displayVendingMenu();
+						System.out.print("Enter Code: ");
 						String userCode = scanner.nextLine();
 						boolean codeIsValid = false;
 						try {
-							codeIsValid = VM.checkItem(userCode, balance.getBalance());
+							codeIsValid = vendingMachine.checkItem(userCode);
 						}
 						catch(Exception e) {
 							System.out.println(e.getMessage());
 						}
-						if(codeIsValid) {
-							
-							BigDecimal balanceNow = VM.dispenseItem(userCode, balance.getBalance());
-							//update balance with the current balance : balanceNow
-							balance.setBalance(balanceNow);
-							//update log
-							
+						if(codeIsValid) {						
+							vendingMachine.dispenseItem(userCode);				
 						}
 					}
 					else if(purchaseMenuOption.equals("3")) {
-						balance.giveChange();
-						
-						//update balance
-						//update log
+						vendingMachine.giveChange();
 					}
 				} while(!purchaseMenuOption.equals("3"));
 			}			
-			/*else if(userInput.equals("3")) {
-				
-					System.exit(1);
-				}	*/		
 		}while(!userInput.equals("3"));
 		
 	}

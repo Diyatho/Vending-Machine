@@ -14,19 +14,19 @@ public class Balance {
 	private int nickels = 0;
 	private int dimes = 0;
 	private int quarters = 0;
-	Log log = new Log();
+	//Log log = new Log();
 
-	public BigDecimal getBalance() {
+	/*public BigDecimal getBalance() {
 		return balance;
 	}
 
 	public Balance() {
 		balance = BigDecimal.ZERO;
-	}
+	}*/
 
-	public void setBalance(BigDecimal currentBalance) {
+	/*public void setBalance(BigDecimal currentBalance) {
 		this.balance = currentBalance;
-	}
+	}*/
 
 	public double getDollars() {
 		return dollars;
@@ -47,13 +47,13 @@ public class Balance {
 				|| amountCheck.equals("20");
 	}
 
-	public BigDecimal updateBalance(BigDecimal inputMoney) {
+	/*public BigDecimal updateBalance(BigDecimal inputMoney) {
 		balance = balance.add(inputMoney);
 		log.createLogEntry("FEED MONEY:",inputMoney, balance);
 		return balance;
-	}
+	}*/
 
-	public void giveChange() {
+	public void makeChange(BigDecimal balance) {
 
 		int totalCoins = balance.multiply(BigDecimal.valueOf(100)).intValue(); 
 				
@@ -73,8 +73,8 @@ public class Balance {
 			}
 		}
 		System.out.println("Total Change: " + quarters + " Quarters, " + dimes + " Dimes, " + nickels + " Nickels");
-		log.createLogEntry("GIVE CHANGE:", balance, BigDecimal.ZERO);
-		
-		balance = BigDecimal.ZERO;
+		/*log.createLogEntry("GIVE CHANGE:", balance, BigDecimal.ZERO);
+		log.writeLog();
+		balance = BigDecimal.ZERO;*/
 	}
 }
