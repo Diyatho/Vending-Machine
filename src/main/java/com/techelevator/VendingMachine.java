@@ -1,7 +1,6 @@
 package com.techelevator;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,12 +71,10 @@ public class VendingMachine {
 				
 				if(item.getQuantityRemaining() == 0 ) {
 					isValid = false;
-					//break;
 					throw new ChoiceFailException("The item is SOLD OUT. Please select another item");
 				}
 				if(item.getPrice().compareTo(balance) > 0) {
 					isValid = false;
-					//break;
 					throw new ChoiceFailException("The balance is not enough to buy this item. Please update your balance");
 				}
 				
@@ -107,26 +104,18 @@ public class VendingMachine {
 				 
 				if (item.getCategory().equals("Chip")) {
 					System.out.println("Crunch Crunch, Yum!");
-					//String arg1 =item.getItemName() + " " + item.getSlotId();
-					//log.createLogEntry(arg1, oldBalance, balance);
 					break;
 				}
 				else if (item.getCategory().equals("Candy")) {
 					System.out.println("Munch Munch, Yum!");
-					//String arg1 =item.getItemName() + " " + item.getSlotId();
-					//log.createLogEntry(arg1, oldBalance, balance);
 					break;
 				}
 				else if (item.getCategory().equals("Drink")) {
 					System.out.println("Glug Glug, Yum!");
-					//String arg1 =item.getItemName() + " " + item.getSlotId();
-					//log.createLogEntry(arg1, oldBalance, balance);
 					break;
 				}
 				else if (item.getCategory().equals("Gum")) {
 					System.out.println("Chew Chew, Yum!");
-					//String arg1 =item.getItemName() + " " + item.getSlotId();
-					//log.createLogEntry(arg1, oldBalance, balance);
 					break;
 				}
 			}
