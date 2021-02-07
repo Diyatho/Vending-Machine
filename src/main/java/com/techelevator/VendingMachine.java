@@ -21,6 +21,7 @@ public class VendingMachine {
 		
 		String[] inventoryData;
 		File stockFile = new File("vendingmachine.csv");
+		boolean salesReportExists = salesReport.readSalesReport();
 		try(Scanner fileScanner = new Scanner(stockFile)){
 			while(fileScanner.hasNextLine()) {
 				String inventoryLine = fileScanner.nextLine();
@@ -42,7 +43,10 @@ public class VendingMachine {
 					Item item = new Gum(inventoryData[0], inventoryData[1],new BigDecimal(inventoryData[2]));	
 					inventory.add(item);
 				}
-				salesReport.addToSalesMap(inventoryData[1], 0);
+				if(!salesReportExists) {
+					salesReport.addToSalesMap(inventoryData[1], 0);
+				}
+				
 			}
 		}catch (Exception e) {
 			System.out.println("Error while stocking inventory");
