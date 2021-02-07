@@ -63,7 +63,9 @@ public class InputConsole{
 				} while(!purchaseMenuOption.equals("3"));
 			}			
 		}while(!userInput.equals("3"));
-		
+		if(userInput.equals("3")) {
+			vendingMachine.endApplication();
+		}
 	}
 
 }

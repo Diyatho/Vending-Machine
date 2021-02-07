@@ -10,6 +10,7 @@ public class VendingMachine {
 	List<Item> inventory = new ArrayList<Item>();
 	Balance balanceObject = new Balance();
 	Log log = new Log();
+	SalesReport salesReport = new SalesReport();
 	private BigDecimal balance;
 	
 	public VendingMachine() {
@@ -38,14 +39,15 @@ public class VendingMachine {
 					inventory.add(item);
 				}
 				if("Gum".equals(inventoryData[3])){
-					Item item = new Gum(inventoryData[0], inventoryData[1],new BigDecimal(inventoryData[2]));
+					Item item = new Gum(inventoryData[0], inventoryData[1],new BigDecimal(inventoryData[2]));	
 					inventory.add(item);
 				}
-				
+				salesReport.addToSalesMap(inventoryData[1], 0);
 			}
 		}catch (Exception e) {
 			System.out.println("Error while stocking inventory");
 		}
+		salesReport.printMap();
 	}
 	
 	public void displayMenu() {
@@ -117,6 +119,9 @@ public class VendingMachine {
 				 //creates the log entry in the format 01/01/2016 12:01:25 PM Cowtales B2 $8.50 $7.50
 				 String arg1 =item.getItemName() + " " + item.getSlotId();
 				 log.createLogEntry(arg1, oldBalance, balance);
+				 
+				 //updates the salesMap
+				 salesReport.update(item.getItemName(),item.getPrice());
 			}
 		}
 		
@@ -141,5 +146,9 @@ public class VendingMachine {
 		log.createLogEntry("GIVE CHANGE:", balance, BigDecimal.ZERO);
 		log.writeLog();
 		balance = BigDecimal.ZERO;
+	}
+	
+	public void endApplication() {
+		salesReport.writeSalesReport();
 	}
 }
