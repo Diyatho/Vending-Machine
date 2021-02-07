@@ -25,13 +25,23 @@ public class VendingMachine {
 				String inventoryLine = fileScanner.nextLine();
 				//System.out.println("inventory line " + inventoryLine);
 				inventoryData = inventoryLine.split("[|]");
-				Item item = new Item();
-				item.setSlotId(inventoryData[0]);
-				item.setItemName(inventoryData[1]);
-				item.setPrice(new BigDecimal(inventoryData[2]));
-				item.setCategory(inventoryData[3]);
-				item.setQuantityRemaining(5);
-				inventory.add(item);
+				if("Chip".equals(inventoryData[3])){
+					Item item = new Chip(inventoryData[0], inventoryData[1],new BigDecimal(inventoryData[2]));
+					inventory.add(item);
+				}
+				if("Candy".equals(inventoryData[3])){
+					Item item = new Candy(inventoryData[0], inventoryData[1],new BigDecimal(inventoryData[2]));
+					inventory.add(item);
+				}
+				if("Drink".equals(inventoryData[3])){
+					Item item = new Drink(inventoryData[0], inventoryData[1],new BigDecimal(inventoryData[2]));
+					inventory.add(item);
+				}
+				if("Gum".equals(inventoryData[3])){
+					Item item = new Gum(inventoryData[0], inventoryData[1],new BigDecimal(inventoryData[2]));
+					inventory.add(item);
+				}
+				
 			}
 		}catch (Exception e) {
 			System.out.println("Error while stocking inventory");
@@ -42,7 +52,7 @@ public class VendingMachine {
 		System.out.println("\nItem                  Count left            Price");
 		System.out.println("_________________________________________________\n");
 		for(Item item : inventory) {
-			System.out.println(item.getItemName() + addSpace(item.getItemName().length()) + item.getQuantityRemaining() + addSpace(1) + item.getPrice());
+			System.out.println(item.getItemName() + addSpace(item.getItemName().length()) + item.getQuantity() + addSpace(1) + item.getPrice());
 		}
 		System.out.println("\n\n");
 		
@@ -66,10 +76,10 @@ public class VendingMachine {
 		boolean found = false;
 		boolean isValid = true;
 		for(Item item : inventory) {
-			if(item.getSlotId().equals(userCode)) {
+			if(item.getSlotId().equalsIgnoreCase(userCode)) {
 				found = true;
 				
-				if(item.getQuantityRemaining() == 0 ) {
+				if(item.getQuantity() == 0 ) {
 					isValid = false;
 					throw new ChoiceFailException("The item is SOLD OUT. Please select another item");
 				}
@@ -90,38 +100,26 @@ public class VendingMachine {
 	
 	//dispenseItem
 	public void dispenseItem(String userCode) {
-		Item userChoice = new Item();
+		//Item userChoice = ;
 		BigDecimal oldBalance = balance;
 		for(Item item : inventory) {
-			if(item.getSlotId().equals(userCode)) {
-				userChoice = item;
-				//prints line with item, price and available balance
-				
+			if(item.getSlotId().equalsIgnoreCase(userCode)) {
+				//prints line with item, price and available balance	
 				balance = balance.subtract(item.getPrice());
+				
 				System.out.println(item.getItemName()+ " " + item.getPrice() + "   " + balance);
 				//decreases quantity by 1
-				 item.setQuantityRemaining(item.getQuantityRemaining() - 1);
+				 item.setQuantity(item.getQuantity() - 1);
 				 
-				if (item.getCategory().equals("Chip")) {
-					System.out.println("Crunch Crunch, Yum!");
-					break;
-				}
-				else if (item.getCategory().equals("Candy")) {
-					System.out.println("Munch Munch, Yum!");
-					break;
-				}
-				else if (item.getCategory().equals("Drink")) {
-					System.out.println("Glug Glug, Yum!");
-					break;
-				}
-				else if (item.getCategory().equals("Gum")) {
-					System.out.println("Chew Chew, Yum!");
-					break;
-				}
+				 //prints custom message for Chip, Candy, Drink and Gum
+				 item.getMesage();
+				 
+				 //creates the log entry in the format 01/01/2016 12:01:25 PM Cowtales B2 $8.50 $7.50
+				 String arg1 =item.getItemName() + " " + item.getSlotId();
+				 log.createLogEntry(arg1, oldBalance, balance);
 			}
 		}
-		String arg1 =userChoice.getItemName() + " " + userChoice.getSlotId();
-		log.createLogEntry(arg1, oldBalance, balance);
+		
 	}
 
 	public BigDecimal getBalance() {

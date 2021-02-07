@@ -2,15 +2,23 @@ package com.techelevator;
 
 import java.math.BigDecimal;
 
-public class Item {
+public abstract class Item {
 	
 	private String slotId;
 	private String itemName;
 	private BigDecimal price;
-	private String category;
-	private int quantityRemaining;
+	private int quantity;
 	
 	
+	
+	public Item(String slotId, String itemName, BigDecimal price) {
+		this.slotId = slotId;
+		this.itemName = itemName;
+		this.price = price;
+		this.quantity = 5;
+	}
+	
+	abstract String getMesage();
 	
 	public String getSlotId() {
 		return slotId;
@@ -23,12 +31,8 @@ public class Item {
 		return price;
 	}
 	
-	public String getCategory() {
-		return category;
-	}
-	
-	public int getQuantityRemaining() {
-		return quantityRemaining;
+	public int getQuantity() {
+		return quantity;
 	}
 	
 	public void setSlotId(String slotId) {
@@ -42,13 +46,12 @@ public class Item {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
+
+	public void setQuantity (int quantity) {
+		this.quantity = quantity;
+	}
 	
-	public void setCategory (String category) {
-		this.category = category;
-	}
-	public void setQuantityRemaining (int quantityRemaining) {
-		this.quantityRemaining = quantityRemaining;
-	}
+
 	
 
 }
