@@ -7,8 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Before;
+
 import com.techelevator.Item;
 
+import com.techelevator.Chip;
 import com.techelevator.VendingMachine;
 
 
@@ -17,17 +20,20 @@ public class VendingMachineTest {
 
 	private VendingMachine VendingMachineTest;
 	
+	@Before
 	public void setup() {
-		VendingMachineTest = new VendingMachine();
-		List<Item> inventory = new ArrayList<Item>();
-		inventory.add(new Chip("A1", "Potato Crisps", new BigDecimal("3.05")));
+		//VendingMachineTest = new VendingMachine();
+		//List<Item> inventory = new ArrayList<Item>();
+		
 	}
 	
 	
 	
 	@Test
 	public void isValidProductSlotKeyWorksProperly() throws ChoiceFailException {
-		
+		VendingMachineTest = new VendingMachine();
+		List<Item> inventory = new ArrayList<Item>();
+		inventory.add(new Chip("A1", "Potato Crisps", new BigDecimal("3.05")));
 		Assert.assertTrue(VendingMachineTest.checkItem("A1"));
 		/*
 		Assert.assertTrue(VendingMachineTest.checkItem("B2"));

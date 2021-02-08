@@ -30,6 +30,7 @@ public class Log {
 	    LocalTime now = LocalTime.now();
 	   // System.out.println(now.format(DateTimeFormatter.ofPattern(pattern)));
 	    String timeForLog = now.format(DateTimeFormatter.ofPattern(pattern));
+	    
 	    //to print 5 as 5.00
 	    logEntry = dateForLog + " " + timeForLog + " "+ action +  " $" + arg1.setScale(2, BigDecimal.ROUND_HALF_UP) + " $" + arg2.setScale(2, BigDecimal.ROUND_HALF_UP);
 	    System.out.println("\nEntering in log: " + logEntry + "\n");
