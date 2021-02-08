@@ -35,7 +35,7 @@ public class InputConsole{
 						String inputMoney = scanner.nextLine();
 						boolean isValidAmount = balance.isValidAmount(inputMoney);
 						if(isValidAmount) {
-							System.out.println("Money entered is valid");
+							//System.out.println("Money entered is valid");
 							System.out.println("Current balance is: "+ vendingMachine.updateBalance(new BigDecimal(inputMoney)));
 						}
 						else{

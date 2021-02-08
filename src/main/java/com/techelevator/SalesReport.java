@@ -32,7 +32,7 @@ public class SalesReport {
 		File inputFile = new File("SalesReport.txt");
 		boolean reportExists = false;
 		if (inputFile.exists()) {
-			System.out.println("Reading from existing sales report");
+			//System.out.println("Reading from existing sales report");
 			try (Scanner fileScanner = new Scanner(inputFile)) {
 				while (fileScanner.hasNextLine()) {
 					
@@ -41,11 +41,11 @@ public class SalesReport {
 					if (lineInSalesreport.contains("|")) {
 						String[] separate = lineInSalesreport.split("\\|");
 						salesReport.put(separate[0], Integer.parseInt(separate[1]));
-						System.out.println("Adding to map :" + separate[0] +":" + separate[1]);
+						//System.out.println("Adding to map :" + separate[0] +":" + separate[1]);
 					}
 					else if (lineInSalesreport.contains("TOTAL SALES")) {
 						grossSales = new BigDecimal(lineInSalesreport.substring(lineInSalesreport.indexOf("$") + 1));
-						System.out.println("existing grosssales = " + grossSales);
+						//System.out.println("existing grosssales = " + grossSales);
 					}
 				}
 				reportExists = true;
@@ -62,12 +62,12 @@ public class SalesReport {
 		
 		//increment the quantity (value) by 1
 		if(salesReport.containsKey(itemName)) {
-			System.out.println("Incrementing quantity in map");
+			//System.out.println("Incrementing quantity in map");
 			Integer currentValue = salesReport.get(itemName);
 			currentValue++;
-			System.out.println("quantity now :" + currentValue);
+			//System.out.println("quantity now :" + currentValue);
 			salesReport.put(itemName, currentValue);
-			System.out.println("updating map :" + itemName + ": " + salesReport.get(itemName));
+			//System.out.println("updating map :" + itemName + ": " + salesReport.get(itemName));
 		}
 		
 		//increase gross sales by the price of the item that just got sold
